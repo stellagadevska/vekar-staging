@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <section className='relative w-full h-screen mx-auto '>
-      <div className='absolute top-1/3 left-[250px] transform -translate-y-1/2 z-10 '>
+      <div className='absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10 '>
         <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300'>
           <ul className='space-y-4 text-white text-base'>
             <li
@@ -72,7 +72,7 @@ const Hero = () => {
       </div>
 
       <div
-        className={`absolute inset-0 top-[100px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row-reverse items-start gap-5`}
+        className={`absolute inset-0 top-[50px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row-reverse items-start gap-5`}
       >
         <div className='flex flex-col justify-center items-center mt-5'>
           <div className='w-4 h-4 rounded-full bg-[#9153ff]' />
@@ -92,7 +92,7 @@ const Hero = () => {
 
       {/* <YinYangCanvas /> */}
 
-      <div className='absolute inset-0 flex justify-center items-center mt-20'>
+      <div className='absolute inset-0 flex justify-center items-center mt-[170px]'>
       <div
           className={`w-[500px] transition duration-300 hover:scale-105 ${
             isRotated ? "rotate-180" : ""
