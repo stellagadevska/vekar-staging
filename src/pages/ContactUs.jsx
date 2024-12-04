@@ -3,19 +3,20 @@ import { motion } from "framer-motion";
 import { Contact, Navbar } from "../components";
 import Footer from "../components/Footer";
 import { styles } from "../styles";
-import { YinYangCanvas } from "../components/canvas";
 import { fadeIn, textVariant } from "../utils/motion";
 import Map from "../components/Map/Map";
 
+import { FaPhoneAlt, FaEnvelope, FaInstagram } from "react-icons/fa";
+
 const ContactUs = () => {
-  const [isFoundationModalOpen, setFoundationModalOpen] = useState(false);
-  const [isFlareModalOpen, setFlareModalOpen] = useState(false);
+  const [modalState, setModalState] = useState({
+    foundation: false,
+    flare: false,
+  });
 
-  const openFoundationModal = () => setFoundationModalOpen(true);
-  const closeFoundationModal = () => setFoundationModalOpen(false);
-
-  const openFlareModal = () => setFlareModalOpen(true);
-  const closeFlareModal = () => setFlareModalOpen(false);
+  const toggleModal = (modalType, state) => {
+    setModalState((prev) => ({ ...prev, [modalType]: state }));
+  };
 
   return (
     <>
@@ -24,40 +25,39 @@ const ContactUs = () => {
       </div>
 
       <div className='flex justify-center space-x-[500px] mb-10 z-10'>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className='bg-[#9153ff] text-white py-3 px-8 rounded-lg shadow-lg hover:bg-[#7a3ee8] transition-colors duration-300'
-          onClick={openFoundationModal}
-        >
-          Contact Foundation
-        </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className='bg-[#9153ff] text-white py-3 px-8 rounded-lg shadow-lg hover:bg-[#7a3ee8] transition-colors duration-300'
-          onClick={openFlareModal}
-        >
-          Contact Flare
-        </motion.button>
+        {["foundation", "flare"].map((type) => (
+          <motion.button
+            key={type}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className='bg-[#9153ff] text-white py-3 px-8 rounded-lg shadow-lg hover:bg-[#7a3ee8] transition-colors duration-300'
+            onClick={() => toggleModal(type, true)}
+          >
+            Contact {type.charAt(0).toUpperCase() + type.slice(1)}
+          </motion.button>
+        ))}
       </div>
 
       <div style={{ zIndex: 10000 }}>
-        {isFoundationModalOpen && (
+        {modalState.foundation && (
           <div className='modal fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center w-full z-[9999]'>
-            <Contact title='foundation' onClose={closeFoundationModal} />
+            <Contact
+              title='foundation'
+              onClose={() => toggleModal("foundation", false)}
+            />
           </div>
         )}
-
-        {isFlareModalOpen && (
+        {modalState.flare && (
           <div className='modal fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-[9999]'>
-            <Contact title='flare' onClose={closeFlareModal} />
+            <Contact
+              title='flare'
+              onClose={() => toggleModal("flare", false)}
+            />
           </div>
         )}
       </div>
 
-      {/* More About Us Section */}
-      <div className='relative bg-[#050b14] pb-20 '>
+      <div className='relative bg-[#050b14] pb-20'>
         <motion.div
           variants={textVariant()}
           className='text-center mt-20 pt-20'
@@ -78,6 +78,37 @@ const ContactUs = () => {
           aliquip ex ea commodo consequat.
         </motion.p>
         <Map location={"Your Location Here"} zoomLevel={17} />
+
+        <div className='text-center mt-20'>
+          <h2 className={`${styles.sectionTitleText} text-center`}>
+            How You Contact Us
+          </h2>
+          <div className='flex justify-center space-x-10 mt-10'>
+            <a
+              href='tel:+1234567890'
+              className='flex flex-row items-center text-white hover:text-[#9153ff] transition-colors duration-300'
+            >
+              <FaPhoneAlt className='text-[#9153ff] mr-5' />
+              <h1 className={`${styles.sectionMediumText}`}> Phone Number</h1>
+            </a>
+            <a
+              href='mailto:contact@flare.com'
+              className='flex flex-row items-center text-white hover:text-[#9153ff] transition-colors duration-300'
+            >
+              <FaEnvelope className='text-[#9153ff] mr-5' />
+              <h1 className={`${styles.sectionMediumText}`}>Email</h1>
+            </a>
+            <a
+              href='https://www.instagram.com/flare'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex flex-row items-center text-white hover:text-[#9153ff] transition-colors duration-300 '
+            >
+              <FaInstagram className='text-[#9153ff] mr-5' />
+              <h1 className={`${styles.sectionMediumText}`}>Instagram</h1>
+            </a>
+          </div>
+        </div>
       </div>
 
       <Footer />
