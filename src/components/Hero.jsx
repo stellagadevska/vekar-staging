@@ -2,72 +2,64 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { styles } from "../styles";
-// import { YinYangCanvas } from "./canvas";
-
 import yinYang from "../../public/yin-yang-landing.png";
-
 import {
   FaBullhorn,
   FaChartLine,
   FaBuilding,
   FaSearch,
   FaCogs,
+  FaBrush,
+  FaFileInvoiceDollar,
+  FaBrain,
+  FaPalette,
 } from "react-icons/fa";
+import ListMenu from "./ListMenu"; // Import the new ListMenu component
 
 const Hero = () => {
   const navigate = useNavigate();
-
   const [isRotated, setIsRotated] = useState(false);
 
   const handleRotation = () => {
     setIsRotated((prev) => !prev);
   };
 
-  const handleNavigation = () => {
+  const handleNavigationFlare = () => {
     navigate("/flare");
   };
 
+  const handleNavigationFoundation = () => {
+    navigate("/foundation");
+  };
+
+  const listFoundationItems = [
+    { icon: FaChartLine, label: "Business Consulting and Strategy" },
+    { icon: FaBuilding, label: "Company Registration" },
+    { icon: FaSearch, label: "Market Search" },
+    { icon: FaBullhorn, label: "Advertising and Media Present" },
+    { icon: FaCogs, label: "Software Development and Business Automations" },
+  ];
+
+  const listFlareItems = [
+    { icon: FaBrush, label: "Branding" },
+    { icon: FaFileInvoiceDollar, label: "Accounting and Taxation" },
+    { icon: FaBrain, label: "Brand Psychology" },
+    { icon: FaPalette, label: "Graphic Design and UGC Content Creation" },
+    { icon: FaCogs, label: "Software Development and Business Automations" },
+  ];
+
   return (
-    <section className='relative w-full h-screen mx-auto '>
+    <section className='relative w-full h-screen mx-auto'>
       <div className='absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10 '>
         <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300'>
-          <ul className='space-y-4 text-white text-base'>
-            <li
-              className='flex items-center gap-3 p-3 hover:bg-gray-700 hover:bg-opacity-60 rounded-md cursor-pointer transition-all duration-300 hover:scale-105 hover:text-[#9153ff]'
-              onClick={handleNavigation}
-            >
-              <FaChartLine className='text-[#9153ff]' />
-              Business Consulting and Strategy
-            </li>
-            <li
-              className='flex items-center gap-3 p-3 hover:bg-black hover:bg-opacity-60 rounded-md cursor-pointer transition-all duration-300 hover:scale-105 hover:text-[#9153ff]'
-              onClick={handleNavigation}
-            >
-              <FaBuilding className='text-[#9153ff]' />
-              Company Registration
-            </li>
-            <li
-              className='flex items-center gap-3 p-3 hover:bg-gray-700 hover:bg-opacity-60 rounded-md cursor-pointer transition-all duration-300 hover:scale-105 hover:text-[#9153ff]'
-              onClick={handleNavigation}
-            >
-              <FaSearch className='text-[#9153ff]' />
-              Market Search
-            </li>
-            <li
-              className='flex items-center gap-3 p-3 hover:bg-[#2b2b2b] rounded-md cursor-pointer transition-all duration-300 hover:scale-105 hover:text-[#9153ff]'
-              onClick={handleNavigation}
-            >
-              <FaBullhorn className='text-[#9153ff]' />
-              Advertising and Media Present
-            </li>
-            <li
-              className='flex items-center gap-3 p-3 hover:bg-[#2b2b2b] rounded-md cursor-pointer transition-all duration-300 hover:scale-105 hover:text-[#9153ff]'
-              onClick={handleNavigation}
-            >
-              <FaCogs className='text-[#9153ff]' />
-              Software Development and Business Automations
-            </li>
-          </ul>
+          {isRotated ? (
+            <ListMenu items={listFlareItems} onClick={handleNavigationFlare} />
+          ) : (
+            <ListMenu
+              items={listFoundationItems}
+              onClick={handleNavigationFoundation}
+            />
+          )}
         </div>
       </div>
 
@@ -90,10 +82,8 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* <YinYangCanvas /> */}
-
       <div className='absolute inset-0 flex justify-center items-center mt-[170px]'>
-      <div
+        <div
           className={`w-[500px] transition duration-300 hover:scale-105 ${
             isRotated ? "rotate-180" : ""
           }`}

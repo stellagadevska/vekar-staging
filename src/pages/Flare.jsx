@@ -8,14 +8,14 @@ import { FaInfoCircle } from "react-icons/fa";
 
 const flareItems = [
   {
-    title: "Business Consulting and Strategy",
+    title: "Branding",
     description: "Providing expert advice to help businesses grow and succeed.",
     icon: "path/to/consulting-icon.svg",
     moreInfo:
       "Our consulting services are tailored to each client's specific needs, helping identify opportunities for growth and create strategies that work.",
   },
   {
-    title: "Company Registration",
+    title: "Accounting and Taxation",
     description:
       "Assisting with the legal processes of registering a new company.",
     icon: "path/to/registration-icon.svg",
@@ -23,7 +23,7 @@ const flareItems = [
       "We handle all the paperwork and legal requirements, ensuring your company is set up smoothly and in compliance with regulations.",
   },
   {
-    title: "Market Research",
+    title: "Brand Psychology",
     description:
       "Conducting thorough market analysis to inform business decisions.",
     icon: "path/to/market-research-icon.svg",
@@ -31,7 +31,7 @@ const flareItems = [
       "Our market research services provide valuable insights into customer behavior, industry trends, and competitor analysis.",
   },
   {
-    title: "Advertising and Media Presence",
+    title: "Graphic Design and UGC Content Creation",
     description:
       "Enhancing brand visibility through strategic advertising and media engagement.",
     icon: "path/to/advertising-icon.svg",
