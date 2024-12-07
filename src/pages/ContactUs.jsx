@@ -10,8 +10,8 @@ import { FaPhoneAlt, FaEnvelope, FaInstagram } from "react-icons/fa";
 
 const ContactUs = () => {
   const [modalState, setModalState] = useState({
-    foundation: false,
-    flare: false,
+    sustain: false,
+    create: false,
   });
 
   const toggleModal = (modalType, state) => {
@@ -25,7 +25,7 @@ const ContactUs = () => {
       </div>
 
       <div className='flex justify-center space-x-[500px] mb-10 z-10'>
-        {["foundation", "flare"].map((type) => (
+        {["sustain", "create"].map((type) => (
           <motion.button
             key={type}
             whileHover={{ scale: 1.05 }}
@@ -39,19 +39,19 @@ const ContactUs = () => {
       </div>
 
       <div style={{ zIndex: 10000 }}>
-        {modalState.foundation && (
+        {modalState.sustain && (
           <div className='modal fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center w-full z-[9999]'>
             <Contact
-              title='foundation'
-              onClose={() => toggleModal("foundation", false)}
+              title='sustain'
+              onClose={() => toggleModal("sustain", false)}
             />
           </div>
         )}
-        {modalState.flare && (
+        {modalState.create && (
           <div className='modal fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-[9999]'>
             <Contact
-              title='flare'
-              onClose={() => toggleModal("flare", false)}
+              title='create'
+              onClose={() => toggleModal("create", false)}
             />
           </div>
         )}
@@ -65,7 +65,7 @@ const ContactUs = () => {
           <h2 className={`${styles.sectionSubText} text-center`}>
             More about us and Where we are based
           </h2>
-          <p className={`${styles.sectionHeadText} text-center`}>Flare</p>
+          <p className={`${styles.sectionHeadText} text-center`}>Create</p>
         </motion.div>
 
         <motion.p
@@ -92,14 +92,14 @@ const ContactUs = () => {
               <h1 className={`${styles.sectionMediumText}`}> Phone Number</h1>
             </a>
             <a
-              href='mailto:contact@flare.com'
+              href='mailto:contact@create.com'
               className='flex flex-row items-center text-white hover:text-[#9153ff] transition-colors duration-300'
             >
               <FaEnvelope className='text-[#9153ff] mr-5' />
               <h1 className={`${styles.sectionMediumText}`}>Email</h1>
             </a>
             <a
-              href='https://www.instagram.com/flare'
+              href='https://www.instagram.com/create'
               target='_blank'
               rel='noopener noreferrer'
               className='flex flex-row items-center text-white hover:text-[#9153ff] transition-colors duration-300 '

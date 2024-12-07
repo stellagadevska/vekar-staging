@@ -24,15 +24,15 @@ const Hero = () => {
     setIsRotated((prev) => !prev);
   };
 
-  const handleNavigationFlare = () => {
-    navigate("/flare");
+  const handleNavigationCreate = () => {
+    navigate("/create");
   };
 
-  const handleNavigationFoundation = () => {
-    navigate("/foundation");
+  const handleNavigationSustain = () => {
+    navigate("/sustain");
   };
 
-  const listFoundationItems = [
+  const listSustainItems = [
     { icon: FaChartLine, label: "Business Consulting and Strategy" },
     { icon: FaBuilding, label: "Company Registration" },
     { icon: FaSearch, label: "Market Search" },
@@ -40,7 +40,7 @@ const Hero = () => {
     { icon: FaCogs, label: "Software Development and Business Automations" },
   ];
 
-  const listFlareItems = [
+  const listCreateItems = [
     { icon: FaBrush, label: "Branding" },
     { icon: FaFileInvoiceDollar, label: "Accounting and Taxation" },
     { icon: FaBrain, label: "Brand Psychology" },
@@ -53,11 +53,11 @@ const Hero = () => {
       <div className='absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10 '>
         <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300'>
           {isRotated ? (
-            <ListMenu items={listFlareItems} onClick={handleNavigationFlare} />
+            <ListMenu items={listCreateItems} onClick={handleNavigationCreate} />
           ) : (
             <ListMenu
-              items={listFoundationItems}
-              onClick={handleNavigationFoundation}
+              items={listSustainItems}
+              onClick={handleNavigationSustain}
             />
           )}
         </div>

@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Flare from "./pages/Flare";
-import Foundation from "./pages/Foundation";
+import Create from "./pages/Create";
+import Sustain from "./pages/Sustain";
 import ContactUs from "./pages/ContactUs";
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
@@ -11,8 +11,8 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Navigate to='home' />} />
         <Route path='home' element={<Home />} />
-        <Route path='flare' element={<Flare />} />
-        <Route path='foundation' element={<Foundation />} />
+        <Route path='create' element={<Create />} />
+        <Route path='sustain' element={<Sustain />} />
         <Route path='contactus' element={<ContactUs />} />
         <Route path='privacy-policy' element={<PrivacyPolicy />} />
       </Routes>

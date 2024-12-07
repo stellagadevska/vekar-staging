@@ -6,7 +6,7 @@ import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 import { FaInfoCircle } from "react-icons/fa";
 
-const flareItems = [
+const createItems = [
   {
     title: "Branding",
     description: "Providing expert advice to help businesses grow and succeed.",
@@ -80,7 +80,7 @@ const flareItems = [
   },
 ];
 
-const FlareCard = ({ title, description, icon, moreInfo }) => {
+const CreateCard = ({ title, description, icon, moreInfo }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -118,7 +118,7 @@ const FlareCard = ({ title, description, icon, moreInfo }) => {
   );
 };
 
-const Flare = () => {
+const Create = () => {
   return (
     <>
       <div className='relative z-0 bg-[#050b14] pb-20'>
@@ -133,7 +133,7 @@ const Flare = () => {
           <h2 className={`${styles.sectionSubText} text-center`}>
             What we do in
           </h2>
-          <p className={`${styles.sectionHeadText} text-center`}>Flare</p>
+          <p className={`${styles.sectionHeadText} text-center`}>Create</p>
         </motion.div>
 
         <motion.p
@@ -151,8 +151,8 @@ const Flare = () => {
 
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex flex-col space-y-8'>
-            {flareItems.map((item, index) => (
-              <FlareCard
+            {createItems.map((item, index) => (
+              <CreateCard
                 key={index}
                 title={item.title}
                 description={item.description}
@@ -168,4 +168,4 @@ const Flare = () => {
   );
 };
 
-export default Flare;
+export default Create;

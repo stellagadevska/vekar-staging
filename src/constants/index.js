@@ -101,7 +101,7 @@ const technologies = [
 const experiences = [
   {
     title: "Business Consulting and Strategy",
-    company_name: "Foundation",
+    company_name: "Sustain",
     icon: yang,
     iconBg: "#000000",
     points: [
@@ -110,7 +110,7 @@ const experiences = [
   },
   {
     title: "Branding",
-    company_name: "Flare",
+    company_name: "Create",
     icon: yin,
     iconBg: "#FFFFFF",
     points: [
@@ -119,7 +119,7 @@ const experiences = [
   },
   {
     title: "Company Registration",
-    company_name: "Foundation",
+    company_name: "Sustain",
     icon: yang,
     iconBg: "#000000",
     points: [
@@ -128,7 +128,7 @@ const experiences = [
   },
   {
     title: "Accounting and Taxation",
-    company_name: "Flare",
+    company_name: "Create",
     icon: yin,
     iconBg: "#FFFFFF",
     points: [
@@ -137,7 +137,7 @@ const experiences = [
   },
   {
     title: "Market Search",
-    company_name: "Foundation",
+    company_name: "Sustain",
     icon: yang,
     iconBg: "#000000",
     points: [
@@ -146,7 +146,7 @@ const experiences = [
   },
   {
     title: "Brand Psychology",
-    company_name: "Flare",
+    company_name: "Create",
     icon: yin,
     iconBg: "#FFFFFF",
     points: [
@@ -155,7 +155,7 @@ const experiences = [
   },
   {
     title: "Advertising and Media Present",
-    company_name: "Foundation",
+    company_name: "Sustain",
     icon: yang,
     iconBg: "#000000",
     points: [
@@ -164,7 +164,7 @@ const experiences = [
   },
   {
     title: "Graphic Design and UGC Content Creation",
-    company_name: "Flare",
+    company_name: "Create",
     icon: yin,
     iconBg: "#FFFFFF",
     points: [
@@ -173,7 +173,7 @@ const experiences = [
   },
   {
     title: "Software Development and Business Automation",
-    company_name: "Foundation and Flare",
+    company_name: "Sustain and Create",
     icon: yinyang,
     iconBg: "#7D7D7D",
     points: [
