@@ -80,9 +80,14 @@ const sustainItems = [
   },
 ];
 
-const SustainCard = ({ title, description, icon, moreInfo }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
+const SustainCard = ({
+  title,
+  description,
+  icon,
+  moreInfo,
+  isExpanded,
+  onClick,
+}) => {
   return (
     <div
       className={`relative p-[2px] rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 ${
@@ -95,9 +100,8 @@ const SustainCard = ({ title, description, icon, moreInfo }) => {
             ? "scale-105 shadow-2xl"
             : "hover:scale-105 hover:shadow-xl"
         } cursor-pointer`}
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={onClick}
       >
-        {/* <img src={icon} alt={title} className="w-16 h-16" /> */}
         <div>
           <h3 className='text-white text-xl font-semibold'>{title}</h3>
           <p className='text-gray-400'>{description}</p>
@@ -119,6 +123,8 @@ const SustainCard = ({ title, description, icon, moreInfo }) => {
 };
 
 const Sustain = () => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
   return (
     <>
       <div className='relative z-0 bg-[#050b14] pb-20'>
@@ -158,6 +164,10 @@ const Sustain = () => {
                 description={item.description}
                 icon={item.icon}
                 moreInfo={item.moreInfo}
+                isExpanded={expandedIndex === index}
+                onClick={() =>
+                  setExpandedIndex(expandedIndex === index ? null : index)
+                }
               />
             ))}
           </div>

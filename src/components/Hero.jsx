@@ -53,7 +53,10 @@ const Hero = () => {
       <div className='absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10 '>
         <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300'>
           {isRotated ? (
-            <ListMenu items={listCreateItems} onClick={handleNavigationCreate} />
+            <ListMenu
+              items={listCreateItems}
+              onClick={handleNavigationCreate}
+            />
           ) : (
             <ListMenu
               items={listSustainItems}
@@ -72,7 +75,7 @@ const Hero = () => {
         </div>
         <div>
           <h1 className={`${styles.heroHeadText}`}>
-            We are <span className='text-[#9153ff]'>Vekar</span>
+            We are <span className='text-[#9153ff]'>360Syng</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
             <span className='text-[#9153ff]'>360Syng:</span> Where{" "}
