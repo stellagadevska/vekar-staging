@@ -14,7 +14,7 @@ import {
   FaBrain,
   FaPalette,
 } from "react-icons/fa";
-import ListMenu from "./ListMenu"; // Import the new ListMenu component
+import ListMenu from "./ListMenu"; 
 
 const Hero = () => {
   const navigate = useNavigate();
