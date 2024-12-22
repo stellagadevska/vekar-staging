@@ -17,7 +17,7 @@ const InfoCard = ({
       }`}
     >
       <div
-        className={`bg-gray-800 p-6 rounded-lg shadow-lg flex flex-row transform transition-transform duration-300 ${
+        className={`bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col md:flex-row transform transition-transform duration-300 ${
           isExpanded
             ? "scale-105 shadow-2xl"
             : "hover:scale-105 hover:shadow-xl"
@@ -26,7 +26,7 @@ const InfoCard = ({
       >
         {/* Left Section: Title and description */}
         <div
-          className={`flex flex-col space-y-2 w-1/2 ${
+          className={`flex flex-col space-y-2 md:w-1/2 ${
             isExpanded ? "justify-center items-center" : ""
           }`}
         >
@@ -47,7 +47,7 @@ const InfoCard = ({
         </div>
 
         {/* Right Section: Additional Info */}
-        <div className="flex flex-col items-start space-y-4 w-1/2">
+        <div className="flex flex-col items-start space-y-4 md:w-1/2">
           {isExpanded && (
             <>
               {/* First Info Item */}
