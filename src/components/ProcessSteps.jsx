@@ -4,6 +4,7 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Ensure you have react-router-dom installed
 
 import "react-vertical-timeline-component/style.min.css";
 
@@ -13,27 +14,40 @@ import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const ProcessStepsCard = ({ experience, isActive, position }) => {
+  const navigate = useNavigate();
+
+  // Determine the path based on the company_name
+  const getPath = (companyName) => {
+    if (companyName === "Create") return "/create";
+    if (companyName === "Sustain") return "/sustain";
+    return "/";
+  };
+
   return (
     <VerticalTimelineElement
       contentStyle={{
         background: "#1d1836",
         color: "#fff",
-        marginLeft: position === "right" ? "-20px" : "-60px", // Adjust this value as needed to move elements away from the line
-        marginRight: position === "left" ? "-20px" : "-60px", // Adjust this value as needed to move elements away from the line
+        marginLeft: position === "right" ? "-20px" : "-60px",
+        marginRight: position === "left" ? "-20px" : "-60px",
       }}
       contentArrowStyle={{ borderRight: "7px solid  #232631" }}
       date={experience.date}
       iconStyle={{
         background: experience.iconBg,
-        display: isActive ? "flex" : "none", // Conditionally show the icon
+        display: isActive ? "flex" : "none",
       }}
       icon={
-        isActive && ( // Conditionally render the icon
-          <div className="flex justify-center items-center w-full h-full">
+        isActive && (
+          <div
+            className='flex justify-center items-center w-full h-full'
+            onClick={() => navigate(getPath(experience.company_name))} // Navigate on icon click
+            style={{ cursor: "pointer" }} // Make it clear that the icon is clickable
+          >
             <img
               src={experience.icon}
               alt={experience.company_name}
-              className="w-[60%] h-[60%] object-contain"
+              className='w-[60%] h-[60%] object-contain'
             />
           </div>
         )
@@ -41,20 +55,26 @@ const ProcessStepsCard = ({ experience, isActive, position }) => {
       position={position}
     >
       <div>
-        <h3 className="text-white text-[24px] font-bold">{experience.title}</h3>
+        <h3
+          className='text-white text-[24px] font-bold'
+          onClick={() => navigate(getPath(experience.company_name))} // Navigate on title click
+          style={{ cursor: "pointer" }}
+        >
+          {experience.title}
+        </h3>
         <p
-          className="text-secondary text-[16px] font-semibold"
+          className='text-secondary text-[16px] font-semibold'
           style={{ margin: 0 }}
         >
           {experience.company_name}
         </p>
       </div>
 
-      <ul className="mt-5 list-disc ml-5 space-y-2">
+      <ul className='mt-5 list-disc ml-5 space-y-2'>
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
+            className='text-white-100 text-[14px] pl-1 tracking-wider'
           >
             {point}
           </li>
@@ -90,11 +110,13 @@ const ProcessSteps = () => {
         <p className={`${styles.sectionSubText} text-center`}>
           The Whole Process
         </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>Step by Step</h2>
+        <h2 className={`${styles.sectionHeadText} text-center`}>
+          Step by Step
+        </h2>
       </motion.div>
 
-      <div className="mt-20 flex flex-col">
-        <VerticalTimeline lineColor="transparent">
+      <div className='mt-20 flex flex-col'>
+        <VerticalTimeline lineColor='transparent'>
           {experiences.map((experience, index) => (
             <div
               key={`experience-wrapper-${index}`}
@@ -108,14 +130,7 @@ const ProcessSteps = () => {
               />
             </div>
           ))}
-        </VerticalTimeline>       
-        <div className="mt-20 flex justify-center items-center ">
-        <ProcessStepsCard
-                experience={experiences[0]}
-                className
-              />
-          </div> 
-             
+        </VerticalTimeline>
       </div>
     </>
   );
