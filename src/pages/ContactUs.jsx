@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { styles } from "../styles";
 import { fadeIn, textVariant } from "../utils/motion";
 import Map from "../components/Map/Map";
+import yinYang from "../../public/yin-yang-landing.png";
 
 import { FaPhoneAlt, FaEnvelope, FaInstagram } from "react-icons/fa";
 
@@ -19,12 +20,16 @@ const ContactUs = () => {
   };
 
   return (
-    <>
-      <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center mb-[200px]'>
+    <div className='bg-[#050b14] min-h-screen text-white'>
+      <div className='bg-cover bg-no-repeat bg-center mb-[100px]'>
         <Navbar />
       </div>
 
-      <div className='flex justify-center space-x-[500px] mb-10 z-10'>
+      <div className='w-full flex justify-center mb-10 pt-[50px]'>
+        <img src={yinYang} className='w-1/4 h-auto' alt='Yin Yang' />
+      </div>
+
+      <div className='flex justify-center space-x-[450px] mb-10 z-10'>
         {["sustain", "create"].map((type) => (
           <motion.button
             key={type}
@@ -57,7 +62,7 @@ const ContactUs = () => {
         )}
       </div>
 
-      <div className='relative bg-[#050b14] pb-20'>
+      <div className='relative pb-20'>
         <motion.div
           variants={textVariant()}
           className='text-center mt-20 pt-20'
@@ -112,7 +117,7 @@ const ContactUs = () => {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
