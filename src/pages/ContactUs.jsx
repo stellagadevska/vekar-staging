@@ -24,8 +24,22 @@ const ContactUs = () => {
       <div className='bg-cover bg-no-repeat bg-center mb-[100px]'>
         <Navbar />
       </div>
-
-      <div className='w-full flex justify-center mb-10 pt-[50px]'>
+      <div className={`max-w-7xl mx-auto flex flex-row items-start gap-5`}>
+        <div className='flex flex-col justify-center items-center mt-5'>
+          {/* <div className='w-4 h-4 rounded-full bg-[#9153ff]' /> */}
+          {/* <div className='w-1 sm:h-64 h-28 violet-gradient' /> */}
+        </div>
+        <div>
+          <h2 className={`${styles.heroHeadText}`}>
+            <span className='text-[#9153ff]'>Contact</span> Us
+          </h2>
+          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
+            Tell us your <span className='text-[#9153ff]'>idea</span> <br />
+            And we will bring it to <span className='text-[#9153ff]'>life</span>
+          </p>
+        </div>
+      </div>
+      <div className='w-full flex justify-center mb-10 '>
         <img src={yinYang} className='w-1/4 h-auto' alt='Yin Yang' />
       </div>
 
@@ -67,10 +81,9 @@ const ContactUs = () => {
           variants={textVariant()}
           className='text-center mt-20 pt-20'
         >
-          <h2 className={`${styles.sectionSubText} text-center`}>
+          <p className={`${styles.sectionHeadText} text-center`}>
             More about us and Where we are based
-          </h2>
-          <p className={`${styles.sectionHeadText} text-center`}>Create</p>
+          </p>
         </motion.div>
 
         <motion.p
