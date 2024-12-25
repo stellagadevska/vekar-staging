@@ -2,6 +2,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaInfoCircle } from "react-icons/fa";
 
+// Reusable component for displaying additional information items
+const InfoItem = ({ text }) => (
+  <div className='text-gray-300 bg-gray-700 p-4 rounded-lg flex items-center space-x-2'>
+    <FaInfoCircle className='text-pink-500' />
+    <p>{text}</p>
+  </div>
+);
+
 const InfoCard = ({
   title,
   description,
@@ -17,63 +25,26 @@ const InfoCard = ({
       }`}
     >
       <div
-        className={`bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col md:flex-row transform transition-transform duration-300 ${
+        className={`bg-gray-800 p-6 rounded-lg shadow-lg transform transition-transform duration-300 ${
           isExpanded
             ? "scale-105 shadow-2xl"
             : "hover:scale-105 hover:shadow-xl"
-        } cursor-pointer`}
+        } cursor-pointer flex flex-col lg:flex-row`}
         onClick={onClick}
       >
-        {/* Left Section: Title and description */}
-        <div
-          className={`flex flex-col space-y-2 md:w-1/2 ${
-            isExpanded ? "justify-center items-center" : ""
-          }`}
-        >
-          <h3
-            className={`text-white text-xl font-semibold ${
-              isExpanded ? "text-center" : ""
-            }`}
-          >
-            {title}
-          </h3>
-          <p
-            className={`text-gray-400 ${
-              isExpanded ? "text-center" : ""
-            }`}
-          >
-            {description}
-          </p>
+        {/* Title and Description */}
+        <div className='flex flex-col space-y-2 lg:w-1/2'>
+          <h3 className='text-white text-xl font-semibold'>{title}</h3>
+          <p className='text-gray-400'>{description}</p>
         </div>
 
-        {/* Right Section: Additional Info */}
-        <div className="flex flex-col items-start space-y-4 md:w-1/2">
-          {isExpanded && (
-            <>
-              {/* First Info Item */}
-              <div className="text-gray-300 mt-4 bg-gray-700 p-4 rounded-lg flex flex-col space-y-2">
-                <div className="flex items-center space-x-2">
-                  <FaInfoCircle className="text-pink-500" />
-                  <p>{moreInfo}</p>
-                </div>
-              </div>
-              {/* Second Info Item */}
-              <div className="text-gray-300 mt-4 bg-gray-700 p-4 rounded-lg flex flex-col space-y-2">
-                <div className="flex items-center space-x-2">
-                  <FaInfoCircle className="text-pink-500" />
-                  <p>{moreInfo}</p>
-                </div>
-              </div>
-              {/* Third Info Item */}
-              <div className="text-gray-300 mt-4 bg-gray-700 p-4 rounded-lg flex flex-col space-y-2">
-                <div className="flex items-center space-x-2">
-                  <FaInfoCircle className="text-pink-500" />
-                  <p>{moreInfo}</p>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+        {/* Additional Information */}
+        {isExpanded && moreInfo && (
+          <div className='flex flex-col space-y-4 mt-4 lg:mt-0 lg:w-1/2'>
+            <InfoItem text={moreInfo} />
+            <InfoItem text={moreInfo} />
+          </div>
+        )}
       </div>
     </div>
   );
