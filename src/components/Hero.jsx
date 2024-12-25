@@ -19,6 +19,7 @@ import ListMenu from "./ListMenu";
 const Hero = () => {
   const navigate = useNavigate();
   const [isRotated, setIsRotated] = useState(false);
+  const [isClicked, setIsClicked] = useState(false); // Track if the image has been clicked
   const [isMobile, setIsMobile] = useState(false);
 
   // Handle screen size changes
@@ -30,6 +31,7 @@ const Hero = () => {
   }, []);
 
   const handleRotation = () => {
+    if (!isClicked) setIsClicked(true); // Stop zoom effect and show menus after the first click
     setIsRotated((prev) => !prev);
   };
 
@@ -57,30 +59,46 @@ const Hero = () => {
     { icon: FaCogs, label: "Software Development and Business Automations" },
   ];
 
+  // Framer Motion variants for zoom and rotation
+  const yinYangVariants = {
+    initial: { scale: 1, rotate: 0 },
+    animate: {
+      scale: [1, 1.1, 1],
+      transition: { duration: 2, repeat: Infinity },
+    },
+    rotated: {
+      rotate: 180,
+      transition: { duration: 0.5 }, // Smooth rotation animation
+    },
+    static: { scale: 1 }, // Static state after the first click
+  };
+
   return (
     <section
       className={`relative w-full h-screen mx-auto ${
         isMobile ? "pb-40" : ""
-      }`} // Add padding-bottom for mobile
+      }`}
     >
       {/* Desktop Layout */}
       {!isMobile && (
         <>
-          <div className="absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10">
-            <div className="bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300">
-              {isRotated ? (
-                <ListMenu
-                  items={listCreateItems}
-                  onClick={handleNavigationCreate}
-                />
-              ) : (
-                <ListMenu
-                  items={listSustainItems}
-                  onClick={handleNavigationSustain}
-                />
-              )}
+          {isClicked && (
+            <div className="absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10">
+              <div className="bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300">
+                {isRotated ? (
+                  <ListMenu
+                    items={listCreateItems}
+                    onClick={handleNavigationCreate}
+                  />
+                ) : (
+                  <ListMenu
+                    items={listSustainItems}
+                    onClick={handleNavigationSustain}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           <div
             className={`absolute inset-0 top-[50px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row-reverse items-start gap-5`}
@@ -102,14 +120,14 @@ const Hero = () => {
           </div>
 
           <div className="absolute inset-0 flex justify-center items-center mt-[170px]">
-            <div
-              className={`w-[500px] transition duration-300 hover:scale-105 ${
-                isRotated ? "rotate-180" : ""
-              }`}
+            <motion.img
+              src={yinYang}
+              className="w-[500px] h-auto cursor-pointer"
               onClick={handleRotation}
-            >
-              <img src={yinYang} className="w-full h-auto cursor-pointer" />
-            </div>
+              variants={yinYangVariants}
+              initial="initial"
+              animate={isClicked ? (isRotated ? "rotated" : "static") : "animate"} // Control animation state
+            />
           </div>
 
           <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
@@ -135,7 +153,6 @@ const Hero = () => {
       {/* Mobile Layout */}
       {isMobile && (
         <div className="flex flex-col items-center gap-10 px-4 mt-10 relative">
-          {/* Hero Title */}
           <div className="text-center">
             <h1 className={`${styles.heroHeadText}`}>
               We are <span className="text-[#9153ff]">360Syng</span>
@@ -147,7 +164,6 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* Yin Yang Image */}
           <div
             className={`w-[300px] transition duration-300 hover:scale-105 ${
               isRotated ? "rotate-180" : ""
@@ -157,7 +173,6 @@ const Hero = () => {
             <img src={yinYang} className="w-full h-auto cursor-pointer" />
           </div>
 
-          {/* Menu */}
           <div className="bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300">
             {isRotated ? (
               <ListMenu
