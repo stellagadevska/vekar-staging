@@ -13,6 +13,7 @@ import {
   FaFileInvoiceDollar,
   FaBrain,
   FaPalette,
+  FaUser,
 } from "react-icons/fa";
 import ListMenu from "./ListMenu";
 
@@ -49,6 +50,11 @@ const Hero = () => {
     { icon: FaSearch, label: "Market Search" },
     { icon: FaBullhorn, label: "Advertising and Media Present" },
     { icon: FaCogs, label: "Software Development and Business Automations" },
+    {
+      icon: FaUser,
+      label: "Contact Us",
+      onClick: () => navigate("/contactus"), // Add navigation for Contact Us
+    },
   ];
 
   const listCreateItems = [
@@ -57,6 +63,11 @@ const Hero = () => {
     { icon: FaBrain, label: "Brand Psychology" },
     { icon: FaPalette, label: "Graphic Design and UGC Content Creation" },
     { icon: FaCogs, label: "Software Development and Business Automations" },
+    {
+      icon: FaUser,
+      label: "Contact Us",
+      onClick: () => navigate("/contactus"), // Add navigation for Contact Us
+    },
   ];
 
   // Framer Motion variants for zoom and rotation
@@ -75,16 +86,14 @@ const Hero = () => {
 
   return (
     <section
-      className={`relative w-full h-screen mx-auto ${
-        isMobile ? "pb-40" : ""
-      }`}
+      className={`relative w-full h-screen mx-auto ${isMobile ? "pb-40" : ""}`}
     >
       {/* Desktop Layout */}
       {!isMobile && (
         <>
           {isClicked && (
-            <div className="absolute top-1/4 left-[230px] transform -translate-y-1/2 z-10">
-              <div className="bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300">
+            <div className='absolute top-1/4 left-[150px] transform -translate-y-1/2 z-10'>
+              <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300'>
                 {isRotated ? (
                   <ListMenu
                     items={listCreateItems}
@@ -103,36 +112,38 @@ const Hero = () => {
           <div
             className={`absolute inset-0 top-[50px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row-reverse items-start gap-5`}
           >
-            <div className="flex flex-col justify-center items-center mt-5">
-              <div className="w-4 h-4 rounded-full bg-[#9153ff]" />
-              <div className="w-1 sm:h-64 h-32 violet-gradient" />
+            <div className='flex flex-col justify-center items-center mt-5'>
+              <div className='w-4 h-4 rounded-full bg-[#9153ff]' />
+              <div className='w-1 sm:h-64 h-32 violet-gradient' />
             </div>
             <div>
               <h1 className={`${styles.heroHeadText}`}>
-                We are <span className="text-[#9153ff]">360Syng</span>
+                We are <span className='text-[#9153ff]'>360Syng</span>
               </h1>
               <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-                <span className="text-[#9153ff]">360Syng:</span> Where{" "}
-                <br className="sm:block hidden" />
+                <span className='text-[#9153ff]'>360Syng:</span> Where{" "}
+                <br className='sm:block hidden' />
                 Structures meets Momentum
               </p>
             </div>
           </div>
 
-          <div className="absolute inset-0 flex justify-center items-center mt-[170px]">
+          <div className='absolute inset-0 flex justify-center items-center mt-[170px]'>
             <motion.img
               src={yinYang}
-              className="w-[500px] h-auto cursor-pointer"
+              className='w-[500px] h-auto cursor-pointer'
               onClick={handleRotation}
               variants={yinYangVariants}
-              initial="initial"
-              animate={isClicked ? (isRotated ? "rotated" : "static") : "animate"} // Control animation state
+              initial='initial'
+              animate={
+                isClicked ? (isRotated ? "rotated" : "static") : "animate"
+              } // Control animation state
             />
           </div>
 
-          <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
-            <a href="#process">
-              <div className="w-[30px] h-[54px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+          <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
+            <a href='#process'>
+              <div className='w-[30px] h-[54px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
                 <motion.div
                   animate={{
                     y: [0, 20, 0],
@@ -142,7 +153,7 @@ const Hero = () => {
                     repeat: Infinity,
                     repeatType: "loop",
                   }}
-                  className="w-3 h-3 rounded-full bg-secondary mb-1"
+                  className='w-3 h-3 rounded-full bg-secondary mb-1'
                 />
               </div>
             </a>
@@ -152,14 +163,13 @@ const Hero = () => {
 
       {/* Mobile Layout */}
       {isMobile && (
-        <div className="flex flex-col items-center gap-10 px-4 mt-10 relative">
-          <div className="text-center">
+        <div className='flex flex-col items-center gap-10 px-4 mt-10 relative'>
+          <div className='text-center'>
             <h1 className={`${styles.heroHeadText}`}>
-              We are <span className="text-[#9153ff]">360Syng</span>
+              We are <span className='text-[#9153ff]'>360Syng</span>
             </h1>
             <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-              <span className="text-[#9153ff]">360Syng:</span> Where{" "}
-              <br />
+              <span className='text-[#9153ff]'>360Syng:</span> Where <br />
               Structure meets Momentum
             </p>
           </div>
@@ -170,10 +180,11 @@ const Hero = () => {
             }`}
             onClick={handleRotation}
           >
-            <img src={yinYang} className="w-full h-auto cursor-pointer" />
+            <img src={yinYang} className='w-full h-auto cursor-pointer' />
           </div>
 
-          <div className="bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300">
+          <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300 mb-[50px]'>
+            {/* Added mb-16 for extra margin */}
             {isRotated ? (
               <ListMenu
                 items={listCreateItems}
