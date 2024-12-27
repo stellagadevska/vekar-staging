@@ -24,10 +24,9 @@ const ContactUs = () => {
       <div className='bg-cover bg-no-repeat bg-center mb-[100px]'>
         <Navbar />
       </div>
-      <div className={`max-w-7xl mx-auto flex flex-row items-start gap-5`}>
+      <div className='max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-5 px-5'>
         <div className='flex flex-col justify-center items-center mt-5'>
-          {/* <div className='w-4 h-4 rounded-full bg-[#9153ff]' /> */}
-          {/* <div className='w-1 sm:h-64 h-28 violet-gradient' /> */}
+          {/* Additional content can go here */}
         </div>
         <div>
           <h2 className={`${styles.heroHeadText}`}>
@@ -39,11 +38,11 @@ const ContactUs = () => {
           </p>
         </div>
       </div>
-      <div className='w-full flex justify-center mb-10 '>
-        <img src={yinYang} className='w-1/4 h-auto' alt='Yin Yang' />
+      <div className='w-full flex justify-center mb-10 px-5'>
+        <img src={yinYang} className='w-1/2 md:w-1/4 h-auto' alt='Yin Yang' />
       </div>
 
-      <div className='flex justify-center space-x-[450px] mb-10 z-10'>
+      <div className='flex flex-col md:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-[500px] mb-10 z-10 px-5'>
         {["sustain", "create"].map((type) => (
           <motion.button
             key={type}
@@ -76,7 +75,7 @@ const ContactUs = () => {
         )}
       </div>
 
-      <div className='relative pb-20'>
+      <div className='relative pb-20 px-5'>
         <motion.div
           variants={textVariant()}
           className='text-center mt-20 pt-20'
@@ -88,7 +87,7 @@ const ContactUs = () => {
 
         <motion.p
           variants={fadeIn("", "", 0.1, 1)}
-          className='mt-4 text-secondary text-[17px] max-w-3xl mx-auto leading-[30px] text-center pb-20'
+          className='mt-4 text-secondary text-[15px] md:text-[17px] max-w-3xl mx-auto leading-[25px] md:leading-[30px] text-center pb-20'
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -97,11 +96,11 @@ const ContactUs = () => {
         </motion.p>
         <Map location={"Your Location Here"} zoomLevel={17} />
 
-        <div className='text-center mt-20'>
+        <div className='text-center mt-20 px-5'>
           <h2 className={`${styles.sectionTitleText} text-center`}>
             How You Contact Us
           </h2>
-          <div className='flex justify-center space-x-10 mt-10'>
+          <div className='flex flex-col md:flex-row justify-center items-center space-y-5 md:space-y-0 md:space-x-10 mt-10'>
             <a
               href='tel:+1234567890'
               className='flex flex-row items-center text-white hover:text-[#9153ff] transition-colors duration-300'

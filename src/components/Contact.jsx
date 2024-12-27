@@ -33,7 +33,6 @@ const Contact = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic form validation
     if (
       !form.from_name ||
       !form.surname ||
@@ -66,7 +65,9 @@ const Contact = (props) => {
       .then(
         () => {
           setLoading(false);
-          setModalMessage("Thank you!\n We have received your request. We will contact you as soon as possible.");
+          setModalMessage(
+            "Thank you!\n We have received your request. We will contact you as soon as possible."
+          );
           setForm({
             from_name: "",
             surname: "",
@@ -92,7 +93,7 @@ const Contact = (props) => {
     "bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium";
 
   return (
-    <div className='xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden'>
+    <div className='xl:mt-12 flex flex-col-reverse md:flex-row gap-10 overflow-hidden px-5'>
       <div className='flex-[0.75] bg-black-100 p-8 rounded-2xl relative'>
         <button
           className='absolute top-4 right-4 text-white text-2xl'
@@ -105,10 +106,10 @@ const Contact = (props) => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className='mt-12 flex flex-col gap-8 w-[650px] h-[760px]'
+          className='mt-12 flex flex-col gap-8'
         >
-          <div className='flex gap-4'>
-            <label className='flex flex-col w-1/2'>
+          <div className='flex flex-col md:flex-row gap-4'>
+            <label className='flex flex-col w-full md:w-1/2'>
               <span className='text-white font-medium mb-4'>Name</span>
               <input
                 type='text'
@@ -119,7 +120,7 @@ const Contact = (props) => {
                 className={inputClass}
               />
             </label>
-            <label className='flex flex-col w-1/2'>
+            <label className='flex flex-col w-full md:w-1/2'>
               <span className='text-white font-medium mb-4'>Surname</span>
               <input
                 type='text'
@@ -184,7 +185,9 @@ const Contact = (props) => {
               onChange={handleCheckboxChange}
               className='w-5 h-5'
             />
-            <span className='text-white'>I agree to the terms and conditions</span>
+            <span className='text-white'>
+              I agree to the terms and conditions
+            </span>
           </div>
           <div className='flex justify-center'>
             <button
