@@ -13,7 +13,7 @@ import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
-const ProcessStepsCard = ({ experience, isActive, position, isLast }) => {
+const ProcessStepsCard = ({ experience, isActive, position, isLast, isMobile }) => {
   const navigate = useNavigate();
 
   const getPath = (companyName) => {
@@ -27,110 +27,67 @@ const ProcessStepsCard = ({ experience, isActive, position, isLast }) => {
       contentStyle={{
         background: "#1d1836",
         color: "#fff",
-        marginTop: isLast ? "100px" : "inherit",
-        ...(isLast
+        ...(isLast && !isMobile
           ? {
               margin: "100px auto 0 auto",
               width: "80%",
               textAlign: "center",
             }
-          : {
-              marginLeft: position === "right" ? "-20px" : "-60px",
-              marginRight: position === "left" ? "-20px" : "-60px",
-            }),
+          : { marginTop: isMobile ? "50px" : "inherit" }),
       }}
-      contentArrowStyle={{
-        ...(isLast
-          ? { display: "none" }
-          : { borderRight: "7px solid #232631" }),
-      }}
+      contentArrowStyle={
+        isMobile || isLast ? { display: "none" } : { borderRight: "7px solid #232631" }
+      }
       date={experience.date}
       iconStyle={{
         background: experience.iconBg,
-        display: isLast ? "none" : isActive ? "flex" : "none", // Hide for last item
+        display: isActive ? "flex" : "none",
+        ...(isLast && !isMobile ? { marginBottom: "200px" } : {}),
       }}
       icon={
-        isLast
-          ? null // No icon for the last item
-          : isActive && (
-              <div
-                className='flex justify-center items-center w-full h-full'
-                onClick={() => navigate(getPath(experience.company_name))}
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  src={experience.icon}
-                  alt={experience.company_name}
-                  className='w-[60%] h-[60%] object-contain'
-                />
-              </div>
-            )
+        isActive && (
+          <div
+            className="flex justify-center items-center w-full h-full"
+            onClick={() => navigate(getPath(experience.company_name))}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              src={experience.icon}
+              alt={experience.company_name}
+              className="w-[60%] h-[60%] object-contain"
+            />
+          </div>
+        )
       }
-      position={isLast ? "0" : position}
+      position={isLast && !isMobile ? "0" : position}
     >
       <div>
         <h3
-          className='text-white text-[24px] font-bold'
+          className="text-white text-[24px] font-bold"
           onClick={() => navigate(getPath(experience.company_name))}
           style={{ cursor: "pointer" }}
         >
           {experience.title}
         </h3>
         <p
-          className='text-secondary text-[16px] font-semibold'
+          className="text-secondary text-[16px] font-semibold"
           style={{ margin: 0 }}
         >
           {experience.company_name}
         </p>
       </div>
 
-      <ul className='mt-5 list-disc ml-5 space-y-2'>
+      <ul className="mt-5 list-disc ml-5 space-y-2">
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] pl-1 tracking-wider'
+            className="text-white-100 text-[14px] pl-1 tracking-wider"
           >
             {point}
           </li>
         ))}
       </ul>
     </VerticalTimelineElement>
-  );
-};
-
-const ProcessStepsStackedCard = ({ experience }) => {
-  const navigate = useNavigate();
-
-  const getPath = (companyName) => {
-    if (companyName === "Create") return "/create";
-    if (companyName === "Sustain") return "/sustain";
-    return "/";
-  };
-
-  return (
-    <div className='bg-[#1d1836] text-white p-6 mb-6 rounded-lg shadow-lg'>
-      <h3
-        className='text-[20px] sm:text-[24px] font-bold cursor-pointer'
-        onClick={() => navigate(getPath(experience.company_name))}
-      >
-        {experience.title}
-      </h3>
-      <p className='text-secondary text-[14px] sm:text-[16px] font-semibold mt-2'>
-        {experience.company_name}
-      </p>
-      <p className='text-[14px] mt-4'>{experience.date}</p>
-
-      <ul className='mt-5 list-disc pl-5 space-y-2'>
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] tracking-wider'
-          >
-            {point}
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 };
 
@@ -174,34 +131,24 @@ const ProcessSteps = () => {
         </h2>
       </motion.div>
 
-      <div className='mt-20 flex flex-col'>
-        {isMobile ? (
-          // Render simple stacked layout for mobile/tablet
-          experiences.map((experience, index) => (
-            <ProcessStepsStackedCard
-              key={`experience-mobile-${index}`}
-              experience={experience}
-            />
-          ))
-        ) : (
-          // Render original timeline layout for desktop
-          <VerticalTimeline lineColor='transparent'>
-            {experiences.map((experience, index) => (
-              <div
-                key={`experience-wrapper-${index}`}
-                ref={(el) => (elementRefs.current[index] = el)}
-              >
-                <ProcessStepsCard
-                  key={`experience-${index}`}
-                  experience={experience}
-                  isActive={index === activeIndex} // Pass active state
-                  position={index % 2 === 0 ? "left" : "right"}
-                  isLast={index === experiences.length - 1} // Pass if it's the last element
-                />
-              </div>
-            ))}
-          </VerticalTimeline>
-        )}
+      <div className="mt-20 flex flex-col">
+        <VerticalTimeline lineColor="transparent">
+          {experiences.map((experience, index) => (
+            <div
+              key={`experience-wrapper-${index}`}
+              ref={(el) => (elementRefs.current[index] = el)}
+            >
+              <ProcessStepsCard
+                key={`experience-${index}`}
+                experience={experience}
+                isActive={index === activeIndex} // Pass active state
+                position={isMobile ? "left" : index % 2 === 0 ? "left" : "right"} // Set alternating positions for desktop
+                isLast={index === experiences.length - 1} // Check if it's the last element
+                isMobile={isMobile} // Pass mobile state
+              />
+            </div>
+          ))}
+        </VerticalTimeline>
       </div>
     </>
   );
