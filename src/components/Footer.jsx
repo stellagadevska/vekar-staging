@@ -19,7 +19,7 @@ const Footer = () => {
   const contactInfo = [
     { icon: "ri-map-pin-line", text: "48, Sitnyakovo Blv., Sofia, Bulgaria" },
     { icon: "ri-phone-line", text: "+359878346***" },
-    { icon: "ri-mail-line", text: "admin@vekar.com" },
+    { icon: "ri-mail-line", text: "admin@360syng.com" },
   ];
 
   return (
@@ -28,7 +28,7 @@ const Footer = () => {
         <div className='grid lg:grid-cols-4 md:grid-cols-3 gap-8 mb-8'>
           {/* About Section */}
           <div>
-            <h1 className='text-2xl font-bold'>Vekar</h1>
+            <h1 className='text-2xl font-bold'>360Syng</h1>
             <p className='mt-4 text-gray-400'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -87,7 +87,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className='text-center text-gray-500 text-sm mt-4'>
-          &copy; {year} Vekar. All rights reserved.
+          &copy; {year} 360Syng. All rights reserved.
         </div>
       </div>
     </footer>
