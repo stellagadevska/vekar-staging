@@ -177,14 +177,16 @@ const Hero = () => {
             </p>
           </div>
 
-          <div
-            className={`w-[300px] transition duration-300 hover:scale-105 ${
-              isRotated ? "rotate-180" : ""
-            }`}
+          <motion.img
+            src={yinYang}
+            className='w-[300px] h-auto cursor-pointer'
             onClick={handleRotation}
-          >
-            <img src={yinYang} className='w-full h-auto cursor-pointer' />
-          </div>
+            variants={yinYangVariants}
+            initial='initial'
+            animate={
+              isClicked ? (isRotated ? "rotated" : "static") : "animate"
+            }
+          />
 
           <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300 mb-[50px]'>
             {isRotated ? (
