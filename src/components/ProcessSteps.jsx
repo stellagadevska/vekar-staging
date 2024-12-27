@@ -33,7 +33,14 @@ const ProcessStepsCard = ({ experience, isActive, position, isLast, isMobile }) 
               width: "80%",
               textAlign: "center",
             }
-          : { marginTop: isMobile ? "50px" : "inherit" }),
+          : {
+              marginTop: isMobile ? "50px" : "inherit",
+              ...(position === "left" && !isMobile
+                ? { right: "100px" } 
+                : position === "right" && !isMobile
+                ? { left: "100px" }
+                : {}),
+            }),
       }}
       contentArrowStyle={
         isMobile || isLast ? { display: "none" } : { borderRight: "7px solid #232631" }
