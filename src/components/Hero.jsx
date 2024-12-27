@@ -21,14 +21,15 @@ const Hero = () => {
   const navigate = useNavigate();
   const [isRotated, setIsRotated] = useState(false);
   const [isClicked, setIsClicked] = useState(false); // Track if the image has been clicked
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
 
   // Handle screen size changes
   useEffect(() => {
-    const updateIsMobile = () => setIsMobile(window.innerWidth < 768);
-    updateIsMobile();
-    window.addEventListener("resize", updateIsMobile);
-    return () => window.removeEventListener("resize", updateIsMobile);
+    const updateIsMobileOrTablet = () =>
+      setIsMobileOrTablet(window.innerWidth <= 1750);
+    updateIsMobileOrTablet();
+    window.addEventListener("resize", updateIsMobileOrTablet);
+    return () => window.removeEventListener("resize", updateIsMobileOrTablet);
   }, []);
 
   const handleRotation = () => {
@@ -86,10 +87,12 @@ const Hero = () => {
 
   return (
     <section
-      className={`relative w-full h-screen mx-auto ${isMobile ? "pb-40" : ""}`}
+      className={`relative w-full h-screen mx-auto ${
+        isMobileOrTablet ? "pb-40" : ""
+      }`}
     >
       {/* Desktop Layout */}
-      {!isMobile && (
+      {!isMobileOrTablet && (
         <>
           {isClicked && (
             <div className='absolute top-1/4 left-[150px] transform -translate-y-1/2 z-10'>
@@ -161,8 +164,8 @@ const Hero = () => {
         </>
       )}
 
-      {/* Mobile Layout */}
-      {isMobile && (
+      {/* Mobile and Tablet Layout */}
+      {isMobileOrTablet && (
         <div className='flex flex-col items-center gap-10 px-4 mt-10 relative'>
           <div className='text-center'>
             <h1 className={`${styles.heroHeadText}`}>
@@ -184,7 +187,6 @@ const Hero = () => {
           </div>
 
           <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300 mb-[50px]'>
-            {/* Added mb-16 for extra margin */}
             {isRotated ? (
               <ListMenu
                 items={listCreateItems}
