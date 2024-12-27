@@ -54,14 +54,14 @@ const ProcessStepsCard = ({ experience, isActive, position, isLast }) => {
           ? null // No icon for the last item
           : isActive && (
               <div
-                className="flex justify-center items-center w-full h-full"
+                className='flex justify-center items-center w-full h-full'
                 onClick={() => navigate(getPath(experience.company_name))}
                 style={{ cursor: "pointer" }}
               >
                 <img
                   src={experience.icon}
                   alt={experience.company_name}
-                  className="w-[60%] h-[60%] object-contain"
+                  className='w-[60%] h-[60%] object-contain'
                 />
               </div>
             )
@@ -70,25 +70,25 @@ const ProcessStepsCard = ({ experience, isActive, position, isLast }) => {
     >
       <div>
         <h3
-          className="text-white text-[24px] font-bold"
+          className='text-white text-[24px] font-bold'
           onClick={() => navigate(getPath(experience.company_name))}
           style={{ cursor: "pointer" }}
         >
           {experience.title}
         </h3>
         <p
-          className="text-secondary text-[16px] font-semibold"
+          className='text-secondary text-[16px] font-semibold'
           style={{ margin: 0 }}
         >
           {experience.company_name}
         </p>
       </div>
 
-      <ul className="mt-5 list-disc ml-5 space-y-2">
+      <ul className='mt-5 list-disc ml-5 space-y-2'>
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] pl-1 tracking-wider"
+            className='text-white-100 text-[14px] pl-1 tracking-wider'
           >
             {point}
           </li>
@@ -108,23 +108,23 @@ const ProcessStepsStackedCard = ({ experience }) => {
   };
 
   return (
-    <div className="bg-[#1d1836] text-white p-6 mb-6 rounded-lg shadow-lg">
+    <div className='bg-[#1d1836] text-white p-6 mb-6 rounded-lg shadow-lg'>
       <h3
-        className="text-[20px] sm:text-[24px] font-bold cursor-pointer"
+        className='text-[20px] sm:text-[24px] font-bold cursor-pointer'
         onClick={() => navigate(getPath(experience.company_name))}
       >
         {experience.title}
       </h3>
-      <p className="text-secondary text-[14px] sm:text-[16px] font-semibold mt-2">
+      <p className='text-secondary text-[14px] sm:text-[16px] font-semibold mt-2'>
         {experience.company_name}
       </p>
-      <p className="text-[14px] mt-4">{experience.date}</p>
+      <p className='text-[14px] mt-4'>{experience.date}</p>
 
-      <ul className="mt-5 list-disc pl-5 space-y-2">
+      <ul className='mt-5 list-disc pl-5 space-y-2'>
         {experience.points.map((point, index) => (
           <li
             key={`experience-point-${index}`}
-            className="text-white-100 text-[14px] tracking-wider"
+            className='text-white-100 text-[14px] tracking-wider'
           >
             {point}
           </li>
@@ -151,7 +151,7 @@ const ProcessSteps = () => {
   };
 
   useEffect(() => {
-    const updateIsMobile = () => setIsMobile(window.innerWidth < 768);
+    const updateIsMobile = () => setIsMobile(window.innerWidth <= 1750);
     updateIsMobile();
 
     window.addEventListener("resize", updateIsMobile);
@@ -174,9 +174,9 @@ const ProcessSteps = () => {
         </h2>
       </motion.div>
 
-      <div className="mt-20 flex flex-col">
+      <div className='mt-20 flex flex-col'>
         {isMobile ? (
-          // Render simple stacked layout for mobile
+          // Render simple stacked layout for mobile/tablet
           experiences.map((experience, index) => (
             <ProcessStepsStackedCard
               key={`experience-mobile-${index}`}
@@ -185,7 +185,7 @@ const ProcessSteps = () => {
           ))
         ) : (
           // Render original timeline layout for desktop
-          <VerticalTimeline lineColor="transparent">
+          <VerticalTimeline lineColor='transparent'>
             {experiences.map((experience, index) => (
               <div
                 key={`experience-wrapper-${index}`}
