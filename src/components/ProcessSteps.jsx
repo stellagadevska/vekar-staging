@@ -131,7 +131,7 @@ const ProcessSteps = () => {
         </h2>
       </motion.div>
 
-      <div className="mt-20 flex flex-col">
+      <div className="mt-10 flex flex-col">
         <VerticalTimeline lineColor="transparent">
           {experiences.map((experience, index) => (
             <div
