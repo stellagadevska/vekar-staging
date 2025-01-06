@@ -19,7 +19,7 @@ const Navbar = () => {
         >
           <img src={logo} alt='logo' className='w-10 h-10 object-contain' />
           <p className='text-black text-[18px] font-bold cursor-pointer'>
-            360Syng
+            360synergy
           </p>
         </Link>
       </div>

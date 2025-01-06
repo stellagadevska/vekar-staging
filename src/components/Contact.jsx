@@ -53,7 +53,7 @@ const Contact = (props) => {
         TEMPLATE_ID,
         {
           from_name: `${form.from_name} ${form.surname}`,
-          to_name: "360Syng",
+          to_name: "360synergy",
           from_email: form.from_email,
           to_email: "stelagadevska@gmail.com",
           phone_number: form.phone_number,

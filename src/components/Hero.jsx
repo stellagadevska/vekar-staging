@@ -121,10 +121,10 @@ const Hero = () => {
             </div>
             <div>
               <h1 className={`${styles.heroHeadText}`}>
-                We are <span className='text-[#9153ff]'>360Syng</span>
+                We are <span className='text-[#9153ff]'>360synergy</span>
               </h1>
               <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-                <span className='text-[#9153ff]'>360Syng:</span> Where{" "}
+                <span className='text-[#9153ff]'>360synergy:</span> Where{" "}
                 <br className='sm:block hidden' />
                 Structures meets Momentum
               </p>
@@ -169,10 +169,10 @@ const Hero = () => {
         <div className='flex flex-col items-center gap-10 px-4 mt-10 relative'>
           <div className='text-center'>
             <h1 className={`${styles.heroHeadText}`}>
-              We are <span className='text-[#9153ff]'>360Syng</span>
+              We are <span className='text-[#9153ff]'>360synergy</span>
             </h1>
             <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-              <span className='text-[#9153ff]'>360Syng:</span> Where <br />
+              <span className='text-[#9153ff]'>360synergy:</span> Where <br />
               Structure meets Momentum
             </p>
           </div>

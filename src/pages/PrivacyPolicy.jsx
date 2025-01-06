@@ -12,7 +12,7 @@ const PrivacyPolicy = () => {
             Privacy Policy
           </h1>
           <p className='text-[#dfd9ff] mb-4'>
-            Welcome to 360Syng! Your privacy is of utmost importance to us. This
+            Welcome to 360synergy! Your privacy is of utmost importance to us. This
             Privacy Policy explains how we collect, use, disclose, and safeguard
             your information when you visit our website.
           </p>
