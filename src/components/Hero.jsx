@@ -20,29 +20,21 @@ import ListMenu from "./ListMenu";
 const Hero = () => {
   const navigate = useNavigate();
   const [isRotated, setIsRotated] = useState(false);
-  const [isClicked, setIsClicked] = useState(false); // Track if the image has been clicked
-  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(
+    window.innerWidth <= 1750
+  );
 
-  // Handle screen size changes
+  // Update screen size state on resize
   useEffect(() => {
-    const updateIsMobileOrTablet = () =>
-      setIsMobileOrTablet(window.innerWidth <= 1750);
-    updateIsMobileOrTablet();
-    window.addEventListener("resize", updateIsMobileOrTablet);
-    return () => window.removeEventListener("resize", updateIsMobileOrTablet);
+    const handleResize = () => setIsMobileOrTablet(window.innerWidth <= 1750);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleRotation = () => {
-    if (!isClicked) setIsClicked(true); // Stop zoom effect and show menus after the first click
+    setIsClicked(true);
     setIsRotated((prev) => !prev);
-  };
-
-  const handleNavigationCreate = () => {
-    navigate("/create");
-  };
-
-  const handleNavigationSustain = () => {
-    navigate("/sustain");
   };
 
   const listSustainItems = [
@@ -54,7 +46,7 @@ const Hero = () => {
     {
       icon: FaUser,
       label: "Contact Us",
-      onClick: () => navigate("/contactus"), // Add navigation for Contact Us
+      onClick: () => navigate("/contactus"),
     },
   ];
 
@@ -67,23 +59,27 @@ const Hero = () => {
     {
       icon: FaUser,
       label: "Contact Us",
-      onClick: () => navigate("/contactus"), // Add navigation for Contact Us
+      onClick: () => navigate("/contactus"),
     },
   ];
 
-  // Framer Motion variants for zoom and rotation
+  // Motion variants for animation
   const yinYangVariants = {
     initial: { scale: 1, rotate: 0 },
     animate: {
       scale: [1, 1.1, 1],
       transition: { duration: 2, repeat: Infinity },
     },
-    rotated: {
-      rotate: 180,
-      transition: { duration: 0.5 }, // Smooth rotation animation
-    },
-    static: { scale: 1 }, // Static state after the first click
+    rotated: { rotate: 180, transition: { duration: 0.5 } },
+    static: { scale: 1 },
   };
+
+  // Menu container component for reuse
+  const MenuContainer = ({ items, onClick }) => (
+    <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300 mb-10'>
+      <ListMenu items={items} onClick={onClick} />
+    </div>
+  );
 
   return (
     <section
@@ -91,24 +87,19 @@ const Hero = () => {
         isMobileOrTablet ? "pb-40" : ""
       }`}
     >
-      {/* Desktop Layout */}
-      {!isMobileOrTablet && (
+      {!isMobileOrTablet ? (
+        // Desktop Layout
         <>
           {isClicked && (
             <div className='absolute top-1/4 left-[150px] transform -translate-y-1/2 z-10'>
-              <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300'>
-                {isRotated ? (
-                  <ListMenu
-                    items={listCreateItems}
-                    onClick={handleNavigationCreate}
-                  />
-                ) : (
-                  <ListMenu
-                    items={listSustainItems}
-                    onClick={handleNavigationSustain}
-                  />
-                )}
-              </div>
+              <MenuContainer
+                items={isRotated ? listCreateItems : listSustainItems}
+                onClick={
+                  isRotated
+                    ? () => navigate("/create")
+                    : () => navigate("/sustain")
+                }
+              />
             </div>
           )}
 
@@ -126,7 +117,7 @@ const Hero = () => {
               <p className={`${styles.heroSubText} mt-2 text-white-100`}>
                 <span className='text-[#9153ff]'>360synergy:</span> Where{" "}
                 <br className='sm:block hidden' />
-                Structures meets Momentum
+                Structure meets Momentum
               </p>
             </div>
           </div>
@@ -140,7 +131,7 @@ const Hero = () => {
               initial='initial'
               animate={
                 isClicked ? (isRotated ? "rotated" : "static") : "animate"
-              } // Control animation state
+              }
             />
           </div>
 
@@ -148,9 +139,7 @@ const Hero = () => {
             <a href='#process'>
               <div className='w-[30px] h-[54px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
                 <motion.div
-                  animate={{
-                    y: [0, 20, 0],
-                  }}
+                  animate={{ y: [0, 20, 0] }}
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,
@@ -162,10 +151,8 @@ const Hero = () => {
             </a>
           </div>
         </>
-      )}
-
-      {/* Mobile and Tablet Layout */}
-      {isMobileOrTablet && (
+      ) : (
+        // Mobile and Tablet Layout
         <div className='flex flex-col items-center gap-10 px-4 mt-10 relative'>
           <div className='text-center'>
             <h1 className={`${styles.heroHeadText}`}>
@@ -183,24 +170,15 @@ const Hero = () => {
             onClick={handleRotation}
             variants={yinYangVariants}
             initial='initial'
-            animate={
-              isClicked ? (isRotated ? "rotated" : "static") : "animate"
-            }
+            animate={isClicked ? (isRotated ? "rotated" : "static") : "animate"}
           />
 
-          <div className='bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300 mb-[50px]'>
-            {isRotated ? (
-              <ListMenu
-                items={listCreateItems}
-                onClick={handleNavigationCreate}
-              />
-            ) : (
-              <ListMenu
-                items={listSustainItems}
-                onClick={handleNavigationSustain}
-              />
-            )}
-          </div>
+          <MenuContainer
+            items={isRotated ? listCreateItems : listSustainItems}
+            onClick={
+              isRotated ? () => navigate("/create") : () => navigate("/sustain")
+            }
+          />
         </div>
       )}
     </section>
