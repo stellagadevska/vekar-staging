@@ -1,176 +1,172 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
-import "react-vertical-timeline-component/style.min.css";
-
 import { styles } from "../styles";
-import { experiences } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { textVariant } from "../utils/motion";
+import yinYang from "../../public/yin-yang-landing.png";
+import {
+  FaBullhorn,
+  FaChartLine,
+  FaBuilding,
+  FaSearch,
+  FaCogs,
+  FaBrush,
+  FaFileInvoiceDollar,
+  FaBrain,
+  FaPalette,
+  FaUser,
+} from "react-icons/fa";
+import ListMenu from "./ListMenu";
 
-const ProcessStepsCard = ({
-  experience,
-  isActive,
-  position,
-  isLast,
-  isMobile,
-}) => {
+const Hero = () => {
   const navigate = useNavigate();
-
-  const getPath = (companyName) => {
-    if (companyName === "Create") return "/create";
-    if (companyName === "Sustain") return "/sustain";
-    return "/";
-  };
-
-  return (
-    <VerticalTimelineElement
-      contentStyle={{
-        background: "#1d1836",
-        color: "#fff",
-        ...(isLast && !isMobile
-          ? {
-              margin: "50px auto 0 auto",
-              width: "80%",
-              textAlign: "center",
-              position: "relative",
-              top: "100px", // Move the content box below the icon
-            }
-          : {
-              marginTop: isMobile ? "50px" : "inherit",
-              ...(position === "left" && !isMobile
-                ? { right: "100px" }
-                : position === "right" && !isMobile
-                ? { left: "100px" }
-                : {}),
-            }),
-      }}
-      contentArrowStyle={
-        isMobile || isLast
-          ? { display: "none" }
-          : { borderRight: "7px solid #232631" }
-      }
-      date={experience.date}
-      iconStyle={{
-        background: experience.iconBg,
-        display: isActive ? "flex" : "none",
-        ...(isLast && !isMobile ? { marginBottom: "200px" } : {}),
-      }}
-      icon={
-        isActive && (
-          <div
-            className='flex justify-center items-center w-full h-full'
-            onClick={() => navigate(getPath(experience.company_name))}
-            style={{ cursor: "pointer" }}
-          >
-            <img
-              src={experience.icon}
-              alt={experience.company_name}
-              className='w-[60%] h-[60%] object-contain'
-            />
-          </div>
-        )
-      }
-      position={isLast && !isMobile ? "0" : position}
-    >
-      <div>
-        <h3
-          className='text-white text-[24px] font-bold'
-          onClick={() => navigate(getPath(experience.company_name))}
-          style={{ cursor: "pointer" }}
-        >
-          {experience.title}
-        </h3>
-        <p
-          className='text-secondary text-[16px] font-semibold'
-          style={{ margin: 0 }}
-        >
-          {experience.company_name}
-        </p>
-      </div>
-
-      <ul className='mt-5 list-disc ml-5 space-y-2'>
-        {experience.points.map((point, index) => (
-          <li
-            key={`experience-point-${index}`}
-            className='text-white-100 text-[14px] pl-1 tracking-wider'
-          >
-            {point}
-          </li>
-        ))}
-      </ul>
-    </VerticalTimelineElement>
+  const [isRotated, setIsRotated] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(
+    window.innerWidth <= 1750
   );
-};
 
-const ProcessSteps = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(null);
-  const elementRefs = useRef([]);
-
-  const handleScroll = () => {
-    elementRefs.current.forEach((ref, index) => {
-      if (ref) {
-        const rect = ref.getBoundingClientRect();
-        if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-          setActiveIndex(index);
-        }
-      }
-    });
-  };
-
+  // Update screen size state on resize
   useEffect(() => {
-    const updateIsMobile = () => setIsMobile(window.innerWidth <= 1750);
-    updateIsMobile();
-
-    window.addEventListener("resize", updateIsMobile);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("resize", updateIsMobile);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const handleResize = () => setIsMobileOrTablet(window.innerWidth <= 1750);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  return (
-    <>
-      <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} text-center`}>
-          The Whole Process
-        </p>
-        <h2 className={`${styles.sectionHeadText} text-center`}>
-          Step by Step
-        </h2>
-      </motion.div>
+  const handleRotation = () => {
+    setIsClicked(true);
+    setIsRotated((prev) => !prev);
+  };
 
-      <div className='mt-10 flex flex-col'>
-        <VerticalTimeline lineColor='transparent'>
-          {experiences.map((experience, index) => (
-            <div
-              key={`experience-wrapper-${index}`}
-              ref={(el) => (elementRefs.current[index] = el)}
-            >
-              <ProcessStepsCard
-                key={`experience-${index}`}
-                experience={experience}
-                isActive={index === activeIndex} // Pass active state
-                position={
-                  isMobile ? "left" : index % 2 === 0 ? "left" : "right"
-                } // Set alternating positions for desktop
-                isLast={index === experiences.length - 1} // Check if it's the last element
-                isMobile={isMobile} // Pass mobile state
+  const listSustainItems = [
+    { icon: FaChartLine, label: "Business Consulting and Strategy" },
+    { icon: FaBuilding, label: "Company Registration" },
+    { icon: FaSearch, label: "Market Search" },
+    { icon: FaBullhorn, label: "Advertising and Media Present" },
+    { icon: FaCogs, label: "Software Development and Business Automations" },
+    {
+      icon: FaUser,
+      label: "Contact Us",
+      onClick: () => navigate("/contactus"),
+    },
+  ];
+
+  const listCreateItems = [
+    { icon: FaBrush, label: "Branding" },
+    { icon: FaFileInvoiceDollar, label: "Accounting and Taxation" },
+    { icon: FaBrain, label: "Brand Psychology" },
+    { icon: FaPalette, label: "Graphic Design and UGC Content Creation" },
+    { icon: FaCogs, label: "Software Development and Business Automations" },
+    {
+      icon: FaUser,
+      label: "Contact Us",
+      onClick: () => navigate("/contactus"),
+    },
+  ];
+
+  // Motion variants for animation
+  const yinYangVariants = {
+    initial: { scale: 1, rotate: 0 },
+    animate: { scale: [1, 1.1, 1], transition: { duration: 2, repeat: Infinity } },
+    rotated: { rotate: 180, transition: { duration: 0.5 } },
+    static: { scale: 1 },
+  };
+
+  // Menu container component for reuse
+  const MenuContainer = ({ items, onClick }) => (
+    <div className="bg-gray-800 bg-opacity-50 p-4 rounded-tl-[50px] rounded-br-[50px] shadow-lg border border-gray-700 hover:border-[#9153ff] hover:shadow-xl hover:scale-105 transition-transform duration-300 mb-10">
+      <ListMenu items={items} onClick={onClick} />
+    </div>
+  );
+
+  return (
+    <section
+      className={`relative w-full h-screen mx-auto ${
+        isMobileOrTablet ? "pb-40" : ""
+      }`}
+    >
+      {!isMobileOrTablet ? (
+        // Desktop Layout
+        <>
+          {isClicked && (
+            <div className="absolute top-1/4 left-[150px] transform -translate-y-1/2 z-10">
+              <MenuContainer
+                items={isRotated ? listCreateItems : listSustainItems}
+                onClick={isRotated ? () => navigate("/create") : () => navigate("/sustain")}
               />
             </div>
-          ))}
-        </VerticalTimeline>
-      </div>
-    </>
+          )}
+
+          <div
+            className={`absolute inset-0 top-[50px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row-reverse items-start gap-5`}
+          >
+            <div className="flex flex-col justify-center items-center mt-5">
+              <div className="w-4 h-4 rounded-full bg-[#9153ff]" />
+              <div className="w-1 sm:h-64 h-32 violet-gradient" />
+            </div>
+            <div>
+              <h1 className={`${styles.heroHeadText}`}>
+                We are <span className="text-[#9153ff]">360synergy</span>
+              </h1>
+              <p className={`${styles.heroSubText} mt-2 text-white-100`}>
+                <span className="text-[#9153ff]">360synergy:</span> Where <br className="sm:block hidden" />
+                Structure meets Momentum
+              </p>
+            </div>
+          </div>
+
+          <div className="absolute inset-0 flex justify-center items-center mt-[170px]">
+            <motion.img
+              src={yinYang}
+              className="w-[500px] h-auto cursor-pointer"
+              onClick={handleRotation}
+              variants={yinYangVariants}
+              initial="initial"
+              animate={isClicked ? (isRotated ? "rotated" : "static") : "animate"}
+            />
+          </div>
+
+          <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
+            <a href="#process">
+              <div className="w-[30px] h-[54px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
+                <motion.div
+                  animate={{ y: [0, 20, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
+                  className="w-3 h-3 rounded-full bg-secondary mb-1"
+                />
+              </div>
+            </a>
+          </div>
+        </>
+      ) : (
+        // Mobile and Tablet Layout
+        <div className="flex flex-col items-center gap-10 px-4 mt-10 relative">
+          <div className="text-center">
+            <h1 className={`${styles.heroHeadText}`}>
+              We are <span className="text-[#9153ff]">360synergy</span>
+            </h1>
+            <p className={`${styles.heroSubText} mt-2 text-white-100`}>
+              <span className="text-[#9153ff]">360synergy:</span> Where <br />
+              Structure meets Momentum
+            </p>
+          </div>
+
+          <motion.img
+            src={yinYang}
+            className="w-[300px] h-auto cursor-pointer"
+            onClick={handleRotation}
+            variants={yinYangVariants}
+            initial="initial"
+            animate={isClicked ? (isRotated ? "rotated" : "static") : "animate"}
+          />
+
+          <MenuContainer
+            items={isRotated ? listCreateItems : listSustainItems}
+            onClick={isRotated ? () => navigate("/create") : () => navigate("/sustain")}
+          />
+        </div>
+      )}
+    </section>
   );
 };
 
-export default SectionWrapper(ProcessSteps, "process");
+export default Hero;
